@@ -1,0 +1,1 @@
+ create table Naukri_registration(regNo number(5) primary key,name varchar2(20),addrs varchar2(20),age number(3),experience number(3),domain varchar2(10),prefferedLocation varchar2(15),expectedSalary number(8));

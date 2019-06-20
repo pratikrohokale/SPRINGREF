@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- Handler mapping -->
+ <bean id="suhm"  class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+       <props>
+          <prop key="/reg.htm">pvc</prop>
+       </props>
+    </property>
+    <property name="interceptors">
+       <list>
+         <ref bean="lci"/>
+        </list>
+    </property>
+ </bean>
+ 
+ <!-- Cfg LocaleResolver -->
+ <bean id="localeResolver"  class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+    <property name="defaultLocale" value="en"/>
+ </bean>
+ <!-- Cfg LocaleChangeInterceptor -->
+ <bean id="lci"  class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+    <property name="paramName" value="language"/>
+ </bean>
+ 
+ <!-- controller class -->
+ <bean id="pvc"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+    <property name="viewName"  value="register"/>
+ </bean>
+ 
+ <!-- Properties file configuration -->
+ <bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+    <property name="basename"  value="com/nt/commons/welcome"/>
+ </bean>
+ 
+ <!-- View Resolver -->
+ <bean id="vr"  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+     <property name="prefix" value="/WEB-INF/pages/"/>
+     <property name="suffix" value=".jsp"/>
+ </bean>
+ 
+</beans>

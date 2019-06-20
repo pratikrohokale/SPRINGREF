@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+     <props>
+       <prop key="home.htm">pvc</prop>
+       <prop key="list_emps.htm">lec</prop>
+       <prop key="edit_emp.htm">eec</prop>
+       <prop key="delete_emp.htm">dec</prop>
+       <prop key="insert_emp.htm">iec</prop>
+     </props>
+    </property>
+  </bean>
+  
+  <!-- Controller classes -->
+  <bean id="pvc"  class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+    <property name="viewName" value="home"/>
+  </bean>
+  <bean id="lec" class="com.nt.controller.ListEmployeeController">
+    <property name="service"  ref="empService"/>
+  </bean>
+  <bean id="eec"  class="com.nt.controller.EditEmpleyeeController">
+    <property name="commandName"  value="empCmd"/>
+    <property name="commandClass"  value="com.nt.command.EmployeeCommand"/>
+    <property name="formView"  value="edit_employee"/>
+    <property name="service"  ref="empService"/>
+    <property name="validator" ref="empValidator"/>
+  </bean>
+  
+  <bean id="iec"  class="com.nt.controller.InsertEmployeeController">
+    <property name="commandName"  value="empCmd"/>
+    <property name="commandClass"  value="com.nt.command.EmployeeCommand"/>
+    <property name="formView"  value="insert_employee"/>
+    <property name="service"  ref="empService"/>
+    <property name="validator" ref="empValidator"/>
+  </bean>
+  
+  
+  
+  <bean id="dec"  class="com.nt.controller.DeleteEmployeeController">
+     <property name="service" ref="empService"/>
+  </bean>
+  
+  <!-- Validator class -->
+  <bean id="empValidator" class="com.nt.validator.EmployeeValidator"/>
+  
+  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/pages/"/>
+    <property name="suffix" value=".jsp"/>
+  </bean>
+  
+  <!-- Properties file Configuration -->
+  <bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+     <property name="basename" value="com/nt/commons/validation"/>
+  </bean>
+  
+  
+</beans>
