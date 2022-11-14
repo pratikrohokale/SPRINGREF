@@ -82,6 +82,6 @@
 		<finalName>MVCListEmpsApp6-AbstractController-LayeredApp</finalName>
 	</build>
 	<properties>
-		<spring.version>4.2.3.RELEASE</spring.version>
+		<spring.version>4.2.7.RELEASE</spring.version>
 	</properties>
 </project>
